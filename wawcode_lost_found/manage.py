@@ -20,13 +20,3 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wawcode_lost_found',
-        'USER': 'admin',
-        'PASSWORD': 'main',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
