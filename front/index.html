@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="master.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+    <title>Creators Page!</title>
+  </head>
+  <body>
+    <div class="page page1">
+        <div class="root-button" onclick="navigate(3)">Znalazłem/am</div>
+        <div class="root-button" onclick="navigate(4)">Zgubiłem/am</div>
+    </div>
+    <div class="map-page">
+        <div id="map"></div>
+    </div>
+    <div class="page page3">
+            <div id="form1-raport">
+              <input type="text" placeholder="Co znalazłeś?" id="input_found_title">
+              <label>Kategoria</label>
+              <select id="input_select_category">
+                  <option>Portfel</option>
+                  <option>Telefon</option>
+                  <option>Klucze</option>
+                  <option>Drobne przedmioty</option>
+                  <option>Inne</option>
+              </select>
+              <label>Opis</label>
+              <input type="text" placeholder="" id='input_found_note'>
+              <label>Czy oczekuję nagrody?</label>
+              <select id="input_select_reward">
+                  <option>Tak</option>
+                  <option>Nie</option>
+              </select>
+              <button onclick="iFoundSubmit()">Zamieść</button>
+            </div>
+            <div id="search1-item">
+              <ul id="FoundsList">
+                  <li>Item 1</li>
+                  <li>Item 1</li>
+                  <li>Item 1</li>
+                  <li>Item 1</li>
+              </ul>
+            </div>
+          </div>
+          <div class="page page4">
+                <div id="form2-raport">
+                  <input type="text" placeholder="Co zgubiłeś/aś?" id="input_found_title2">
+                  <label>Kategoria</label>
+                  <select id="input_select_category2">
+                      <option>Portfel</option>
+                      <option>Telefon</option>
+                      <option>Klucze</option>
+                      <option>Drobne przedmioty</option>
+                      <option>Inne</option>
+                  </select>
+                  <label>Opis</label>
+                  <input type="text" placeholder="" id='input_found_note2'>
+                  <button onclick="iLostSubmit()">Zamieść</button>
+                </div>
+                <div id="search2-item">
+                    <div id="scroller">
+                        <ul id="LostList">
+                            <li>Item 1</li>
+                            <li>Item 1</li>
+                            <li>Item 1</li>
+                            <li>Item 1</li>
+                        </ul>
+                    </div>
+                  
+                </div>
+              </div>
+              <div class="modal fade bd-example-modal-lg" id="login_Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <label>Login</label>
+                        <input type="text" id="login_input">
+                        <label>Telefon</label>
+                        <input type="text" id="phone_input">
+                        <label>Email</label>
+                        <input type="email" id="email_input">
+                        <button onclick="SetMe()">Zaloguj</button>
+                      </div>
+                    </div>
+                  </div>          
+    <script src="master.js"></script>
+
+  </body>
+</html>
+
+
+
+
+

@@ -1,1 +1,3 @@
-console.log("dupa")
+document.querySelectorAll('.page').forEach(el =>{
+    el.style.display = none;
+})
