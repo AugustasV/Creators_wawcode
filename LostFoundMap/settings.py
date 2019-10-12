@@ -25,7 +25,7 @@ SECRET_KEY = '%d!7%-!l_#l809ax-rda74p3sy88!4i23(w)k+oz&-@4#1hx_%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wawcode.localtunnel.me', 'localhost']
 
 
 # Application definition
@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #own
-    'app'
+    'app',
+
+    #3rd party
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +81,12 @@ WSGI_APPLICATION = 'LostFoundMap.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'lostfoundmap',
+        'USER': 'matx',
+        'PASSWORD': 'Dafay#@!$',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
