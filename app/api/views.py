@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from .. import models
 from . import serializers
 
-
-class UserViewset(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
+#
+# class UserViewset(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = serializers.UserSerializer
 
 
 # class ProfileViewset(viewsets.ModelViewSet):
@@ -19,8 +19,8 @@ class ThingViewset(viewsets.ModelViewSet):
     serializer_class = serializers.ThingSerializer
 
 
-class LocalisationViewset(viewsets.ModelViewSet):
-    queryset = models.Localisation.objects.all()
-    serializer_class = serializers.LocalisationSerializer
+# class LocalisationViewset(viewsets.ModelViewSet):
+#     queryset = models.Localisation.objects.all()
+#     serializer_class = serializers.LocalisationSerializer
 
 

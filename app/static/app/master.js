@@ -92,8 +92,6 @@ function getAllItems(callback){
             })
         })
         callback();
-    }, function(err){
-
     })
 }
 
