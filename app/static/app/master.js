@@ -157,7 +157,7 @@ function iFoundSubmit(){
         var lat = marker.getLatLng().lat;
         var lang = marker.getLatLng().lng;
 
-        $.post('localhost:8888/api/Thing', {
+        $.post('http://localhost:5555/api/Thing', {
             identity:Math.random().toString().split('.')[1],
             name: title,
             is_lost:true,
