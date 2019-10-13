@@ -1,17 +1,18 @@
 version: '3'
 
+volumes:
+  db-data:
+    driver: local
+
 services:
   db:
     image: postgres
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/wawcode_docker
     ports:
       - "8000:8000"
     depends_on:
       - db
-=======
-      - db
->>>>>>> 60187b4eae84ecb905c20bdb8ad448c2a4c5170c
