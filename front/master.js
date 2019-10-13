@@ -47,8 +47,8 @@ function navigate(id){
     }
 }
 
-var areaitems = JSON.parse('[{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.23446165559543,"lng":20.997619628906254,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.224142721422595,"lng":21.03366851806641,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.24814633686761,"lng":21.029548645019535,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.222879013637474,"lng":21.000022888183594,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.244567673892846,"lng":20.97427368164063,"r":"Tak"}]');
-var areaitems2 = JSON.parse('[{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.23446165559543,"lng":20.997619628906254,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.224142721422595,"lng":21.03366851806641,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.24814633686761,"lng":21.029548645019535,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.222879013637474,"lng":21.000022888183594,"r":"Tak"},{"t":"Czrny portfel","c":"Portfel","n":"Jest czarny","lat":52.244567673892846,"lng":20.97427368164063,"r":"Tak"}]');
+var areaitems = JSON.parse('[{"t":"Czarny Portfel","c":"Portfel","n":"Uszkodzona kieszonka","lat":52.237361103676314,"lng":20.995259284973148,"r":"Tak","login":"Rafał","phone":"234 523 526","email":"custom@example.com","id":"7989731564116171"},{"t":"Xaomi","c":"Telefon","n":"Zbita szyba","lat":52.23507192877554,"lng":20.992383956909183,"r":"Tak","login":"Rafał","phone":"234 523 526","email":"custom@example.com","id":"09735985657228374"},{"t":"Klucze","c":"Klucze","n":"","lat":52.23607170164549,"lng":20.99667549133301,"r":"Nie","login":"Rafał","phone":"234 523 526","email":"custom@example.com","id":"30899317352911315"},{"t":"Okulary","c":"Drobne przedmioty","n":"Zbita lewa soczewka","lat":52.23743977539629,"lng":20.9893798828125,"r":"Nie","login":"Rafał","phone":"234 523 526","email":"custom@example.com","id":"873925034100641"},{"t":"Czołg","c":"Inne","n":"T34 z pustym bakiem","lat":52.233993201212165,"lng":20.98568916320801,"r":"Tak","login":"Rafał","phone":"234 523 526","email":"custom@example.com","id":"5784189722920436"}]');
+var areaitems2 = JSON.parse('[]');
 
 var markers = [];
 function addPoint(lat,lng){
@@ -68,19 +68,31 @@ function clearMarkers(){
 
 function buildPopUp(e){
     return "<div style='text-align:center'><strong>"+e.c+"</strong></div>"+
-    "<hr>"+
+    "<hr style='padding:0; margin:0'>"+
     "<div style='text-align:center'>"+e.t+"</div>"+
-    "<div style='text-align:center'>"+e.n+"</div>"
+    "<div style='text-align:center'>"+e.n+"</div>"+
+    "<div style='text-align:right'> <a href='#' onclick='refreshFounds(\""+e.id+"\")'>Pokaż</a></div>"
 }
 
-function refreshFounds(){
+function refreshFounds(idRand){
     var opt = "";
-    areaitems.forEach(el =>{
-        if(el.t != "") opt+="<li>"+el.t+"</li>";
-        var mr = addPoint(el.lat, el.lng);
-        mr.bindPopup(buildPopUp(el));
-
-    })
+    if(idRand){
+        areaitems.forEach(el =>{
+            if(el.id.toString() == idRand.toString()){
+                if(el.t != "") opt+="<a href='#' onclick='fillCustomModal({id:\""+el.id+"\",e:\""+el.email+"\", c:\""+el.c+"\", o:\""+el.n+"\", r:\""+el.r+"\", p:\""+el.phone+"\" })'><li>"+el.t+"</li></a>";
+                var mr = addPoint(el.lat, el.lng);
+                mr.bindPopup(buildPopUp(el));
+            }
+        })
+    }else{
+        areaitems.forEach(el =>{
+            if(el.t != "") opt+="<a href='#' onclick='fillCustomModal({id:\""+el.id+"\",e:\""+el.email+"\", c:\""+el.c+"\", o:\""+el.n+"\", r:\""+el.r+"\", p:\""+el.phone+"\" })'><li>"+el.t+"</li></a>";
+            var mr = addPoint(el.lat, el.lng);
+            mr.bindPopup(buildPopUp(el));
+    
+        })
+    }
+    
     document.getElementById('FoundsList').innerHTML = opt;
 }
 
@@ -96,7 +108,6 @@ function refreshLosts(){
     document.getElementById('LostList').innerHTML = opt;
 }
 var map = L.map('map');
-
 function showMap(){
     map.setView([52.2441779, 21.0077], 12);
     L.tileLayer('https://b.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -105,36 +116,40 @@ function showMap(){
     map.invalidateSize();
     mapVisible = true;
 }
-
 var marker = null;
 function onMapClick(e){
     if(marker != null) marker.remove();
     marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 }
-
-
 navigate(1);
-
 function iFoundSubmit(){
-    var title = document.getElementById('input_found_title').value;
-    var category = document.getElementById('input_select_category').value;
-    var note = document.getElementById('input_found_note').value;
-    var rewart = document.getElementById('input_select_reward').value;
-    var lat = marker.getLatLng().lat;
-    var lang = marker.getLatLng().lng;
+    if(typeof localStorage.getItem('login') == null){
+        $('#login_Modal').modal();
+    }else{
+        var title = document.getElementById('input_found_title').value;
+        var category = document.getElementById('input_select_category').value;
+        var note = document.getElementById('input_found_note').value;
+        var rewart = document.getElementById('input_select_reward').value;
+        var lat = marker.getLatLng().lat;
+        var lang = marker.getLatLng().lng;
 
-    areaitems.push({
-        t: title,
-        c:category,
-        n:note,
-        lat:lat,
-        lng:lang,
-        r:rewart
-    });
+        areaitems.push({
+            id:Math.random().toString().split('.')[1],
+            t: title,
+            c:category,
+            n:note,
+            lat:lat,
+            lng:lang,
+            r:rewart,
+            login:localStorage.login,
+            phone:localStorage.phone,
+            email:localStorage.email,
+        });
 
-    clearMarkers();
-    refreshFounds();
-    marker.remove();
+        clearMarkers();
+        refreshFounds();
+        marker.remove();
+    }
 }
 
 function iLostSubmit(){
@@ -161,12 +176,26 @@ function iLostSubmit(){
         clearMarkers();
         refreshLosts();
         marker.remove();
-    }
-    
+    } 
 }
 
 function SetMe(){
     localStorage.login = document.getElementById('login_input');
     localStorage.phone = document.getElementById('phone_input');
     localStorage.email = document.getElementById('email_input');
+}
+
+function fillCustomModal(e){
+    console.log(e);
+    document.getElementById('fill_category').innerHTML = e.c;
+    document.getElementById('fill_opis').innerHTML = e.o;
+    document.getElementById('fill_reward').innerHTML = e.r;
+    document.getElementById('fill_email').innerHTML = e.e;
+    document.getElementById('fill_phone').innerHTML = e.p;
+
+    showInfoModal();
+}
+
+function showInfoModal(){
+    $('#info_Modal').modal();
 }
