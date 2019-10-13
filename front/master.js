@@ -75,7 +75,8 @@ function buildPopUp(e){
 }
 
 function getAllItems(callback){
-    $.get('localhost:8888', function(data){
+    $.get('http://localhost:5555/api/Thing', function(data){
+        console.log(data);
         callback();
     }, function(err){
 
