@@ -75,7 +75,7 @@ function buildPopUp(e){
 }
 
 function getAllItems(callback){
-    $.get('http://localhost:5555/api/Thing/', function(data){
+    $.get('http://localhost:8000/api/Thing/', function(data){
         areaitems = [];
         data.forEach(element =>{
             areaitems.push({
@@ -153,11 +153,9 @@ function iFoundSubmit(){
         var title = document.getElementById('input_found_title').value;
         var category = document.getElementById('input_select_category').value;
         var note = document.getElementById('input_found_note').value;
-        var rewart = document.getElementById('input_select_reward').value;
         var lat = marker.getLatLng().lat;
         var lang = marker.getLatLng().lng;
-
-        $.post('http://localhost:5555/api/Thing/', {
+    var payload = {
             identity:Math.random().toString().split('.')[1],
             name: title,
             is_lost:true,
@@ -167,18 +165,12 @@ function iFoundSubmit(){
             lng:lang,
             login:localStorage.login,
             phone:localStorage.phone,
-            email:localStorage.email,
-        }, function(data){
+            email:localStorage.email
+        };
+        $.post('http://localhost:8000/api/Thing/',payload , function(data){
             clearMarkers();
             refreshFounds();
             marker.remove();
-        }, function(err){
-            clearMarkers();
-            refreshFounds();
-            marker.remove();
-            console.log(err);
-            throw err;
-            
         });
 
         
