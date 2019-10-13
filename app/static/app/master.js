@@ -75,7 +75,7 @@ function buildPopUp(e){
 }
 
 function getAllItems(callback){
-    $.get('http://localhost:8000/api/Thing/', function(data){
+    $.get('/api/Thing/', function(data){
         areaitems = [];
         data.forEach(element =>{
             areaitems.push({
@@ -167,7 +167,7 @@ function iFoundSubmit(){
             phone:localStorage.phone,
             email:localStorage.email
         };
-        $.post('http://localhost:8000/api/Thing/',payload , function(data){
+        $.post('/api/Thing/',payload , function(data){
             clearMarkers();
             refreshFounds();
             marker.remove();
