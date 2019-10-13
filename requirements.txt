@@ -17,3 +17,4 @@ virtualenv==16.7.5
 virtualenv-clone==0.5.3
 django-heroku==0.3.1
 gunicorn==19.9.0
+djangorestframework==3.10.3
