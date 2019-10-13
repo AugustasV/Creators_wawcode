@@ -53,8 +53,13 @@ var areaitems2 = JSON.parse('[]');
 var markers = [];
 function addPoint(lat,lng){
     console.log("adding "+lat+" "+lng)
-    var mra = L.marker([lat,lng]).addTo(map);
-    markers.push(mra)
+    try{
+        var mra = L.marker([lat,lng]).addTo(map);
+        markers.push(mra)
+    }catch(ex){
+        console.log(ex);
+    }
+    
     return mra;
 }
 
