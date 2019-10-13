@@ -147,7 +147,7 @@ function onMapClick(e){
 }
 navigate(1);
 function iFoundSubmit(){
-    if(typeof localStorage.getItem('login') == null){
+    if(localStorage.getItem('login') == null){
         $('#login_Modal').modal();
     }else{
         var title = document.getElementById('input_found_title').value;
@@ -213,9 +213,10 @@ function iLostSubmit(){
 }
 
 function SetMe(){
-    localStorage.login = document.getElementById('login_input');
-    localStorage.phone = document.getElementById('phone_input');
-    localStorage.email = document.getElementById('email_input');
+    localStorage.login = document.getElementById('login_input').value;
+    localStorage.phone = document.getElementById('phone_input').value;
+    localStorage.email = document.getElementById('email_input').value;
+    $('#login_Modal').modal('hide');
 }
 
 function fillCustomModal(e){
