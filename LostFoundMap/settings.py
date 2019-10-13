@@ -25,7 +25,7 @@ SECRET_KEY = '%d!7%-!l_#l809ax-rda74p3sy88!4i23(w)k+oz&-@4#1hx_%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wawcode.localtunnel.me', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'LostFoundMap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'name',
-        'USER': 'user',
-        'PASSWORD': 'password',
+        'NAME': 'lostfoundmap',
+        'USER': 'matx',
+        'PASSWORD': 'Dafay#@!$',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -133,3 +133,4 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
