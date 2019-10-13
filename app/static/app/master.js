@@ -76,7 +76,21 @@ function buildPopUp(e){
 
 function getAllItems(callback){
     $.get('http://localhost:5555/api/Thing', function(data){
-        console.log(data);
+        areaitems = [];
+        data.forEach(element =>{
+            areaitems.push({
+                t:element.name,
+                c:element.category,
+                n:element.note,
+                lat:element.lat,
+                lng:element.lng,
+                r:"Tak",
+                login:element.autor,
+                phone:element.phone,
+                email:element.email,
+                id:element.identity
+            })
+        })
         callback();
     }, function(err){
 
@@ -145,26 +159,30 @@ function iFoundSubmit(){
         var lat = marker.getLatLng().lat;
         var lang = marker.getLatLng().lng;
 
-        $.post('localhost:8888', {
-            id:Math.random().toString().split('.')[1],
-            t: title,
-            c:category,
-            n:note,
+        $.post('localhost:8888/api/Thing', {
+            identity:Math.random().toString().split('.')[1],
+            name: title,
+            category:category,
+            note:note,
             lat:lat,
             lng:lang,
-            r:rewart,
             login:localStorage.login,
             phone:localStorage.phone,
             email:localStorage.email,
         }, function(data){
-            
+            clearMarkers();
+            refreshFounds();
+            marker.remove();
         }, function(err){
-
+            clearMarkers();
+            refreshFounds();
+            marker.remove();
+            console.log(err);
+            throw err;
+            
         })
 
-        clearMarkers();
-        refreshFounds();
-        marker.remove();
+        
     }
 }
 
