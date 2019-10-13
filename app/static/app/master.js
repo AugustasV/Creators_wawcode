@@ -162,6 +162,7 @@ function iFoundSubmit(){
         $.post('localhost:8888/api/Thing', {
             identity:Math.random().toString().split('.')[1],
             name: title,
+            is_lost:true,
             category:category,
             note:note,
             lat:lat,
