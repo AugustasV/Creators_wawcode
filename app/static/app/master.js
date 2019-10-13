@@ -78,8 +78,6 @@ function getAllItems(callback){
     $.get('http://localhost:5555/api/Thing', function(data){
         console.log(data);
         callback();
-    }, function(err){
-
     })
 }
 
