@@ -82,10 +82,9 @@ WSGI_APPLICATION = 'LostFoundMap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'resttest2',
-        'USER': 'matx',
-        'PASSWORD': 'Dafay#@!$',
-        'HOST': 'localhost',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
