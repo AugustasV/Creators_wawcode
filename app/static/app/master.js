@@ -75,7 +75,7 @@ function buildPopUp(e){
 }
 
 function getAllItems(callback){
-    $.get('http://localhost:5555/api/Thing', function(data){
+    $.get('http://localhost:5555/api/Thing/', function(data){
         areaitems = [];
         data.forEach(element =>{
             areaitems.push({
@@ -157,7 +157,7 @@ function iFoundSubmit(){
         var lat = marker.getLatLng().lat;
         var lang = marker.getLatLng().lng;
 
-        $.post('http://localhost:5555/api/Thing', {
+        $.post('http://localhost:5555/api/Thing/', {
             identity:Math.random().toString().split('.')[1],
             name: title,
             is_lost:true,
