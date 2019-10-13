@@ -147,7 +147,7 @@ function onMapClick(e){
 }
 navigate(1);
 function iFoundSubmit(){
-    if(localStorage.getItem('login') == null){
+    if( localStorage.getItem('login') == null){
         $('#login_Modal').modal();
     }else{
         var title = document.getElementById('input_found_title').value;
@@ -179,11 +179,11 @@ function iFoundSubmit(){
             console.log(err);
             throw err;
             
-        })
+        });
 
         
     }
-}
+};
 
 function iLostSubmit(){
     if(typeof localStorage.login === "undefined"){
