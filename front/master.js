@@ -74,6 +74,14 @@ function buildPopUp(e){
     "<div style='text-align:right'> <a href='#' onclick='refreshFounds(\""+e.id+"\")'>Pokaż</a></div>"
 }
 
+function getAllItems(callback){
+    $.get('localhost:8888', function(data){
+        callback();
+    }, function(err){
+
+    })
+}
+
 function refreshFounds(idRand){
     var opt = "";
     if(idRand){
@@ -85,12 +93,15 @@ function refreshFounds(idRand){
             }
         })
     }else{
-        areaitems.forEach(el =>{
-            if(el.t != "") opt+="<a href='#' onclick='fillCustomModal({id:\""+el.id+"\",e:\""+el.email+"\", c:\""+el.c+"\", o:\""+el.n+"\", r:\""+el.r+"\", p:\""+el.phone+"\" })'><li>"+el.t+"</li></a>";
-            var mr = addPoint(el.lat, el.lng);
-            mr.bindPopup(buildPopUp(el));
-    
+        getAllItems(function(){
+            areaitems.forEach(el =>{
+                if(el.t != "") opt+="<a href='#' onclick='fillCustomModal({id:\""+el.id+"\",e:\""+el.email+"\", c:\""+el.c+"\", o:\""+el.n+"\", r:\""+el.r+"\", p:\""+el.phone+"\" })'><li>"+el.t+"</li></a>";
+                var mr = addPoint(el.lat, el.lng);
+                mr.bindPopup(buildPopUp(el));
+        
+            })
         })
+        
     }
     
     document.getElementById('FoundsList').innerHTML = opt;
@@ -133,7 +144,7 @@ function iFoundSubmit(){
         var lat = marker.getLatLng().lat;
         var lang = marker.getLatLng().lng;
 
-        areaitems.push({
+        $.post('localhost:8888', {
             id:Math.random().toString().split('.')[1],
             t: title,
             c:category,
@@ -144,7 +155,11 @@ function iFoundSubmit(){
             login:localStorage.login,
             phone:localStorage.phone,
             email:localStorage.email,
-        });
+        }, function(data){
+            
+        }, function(err){
+
+        })
 
         clearMarkers();
         refreshFounds();
